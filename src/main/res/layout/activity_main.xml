@@ -11,19 +11,12 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:textSize="40dp"
-
-        />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Type your name please"
+        android:text="Type your URL"
         android:textSize="30dp"
 
         />
+
+
 
     <Button
         android:id="@+id/btn_submit"
@@ -33,11 +26,12 @@
 
         />
 
-    <Button
-        android:id="@+id/btn_new"
+    <EditText
+        android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New activity"
+        android:hint="Downloading content"
+        android:textSize="30dp"
 
         />
 

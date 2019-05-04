@@ -18,10 +18,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.i(TAG,"I'm onCreate");
+        //Log.i(TAG,"I'm onCreate");
         setupUI();
     }
 
+    /*
     @Override
     protected void onResume(){
         super.onResume();
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
     }
+    */
 
     private void setupUI(){
 
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Button mButton =(Button)findViewById(R.id.btn_submit);
 
-        final Button mNewButton = (Button)findViewById(R.id.btn_new);
+        //final Button mNewButton = (Button)findViewById(R.id.btn_new); new activity constant
 
         final Intent intent2= new Intent(this,Main2Activity.class);
 
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
         mNewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
-
+*/
     }
 
     private void goSecondActivity() {
