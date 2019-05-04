@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Hello_world_2.0</string>
+    <string name="text_hint">Type your name</string>
+    <string name="btn_new">new activity</string>
+    <string name="btn_submit">submit</string>
+    <string name="text_activ2">value</string>
+</resources>
