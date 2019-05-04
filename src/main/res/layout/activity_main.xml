@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,28 +11,34 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Type your URL"
+        android:text="@string/text_hint"
         android:textSize="30dp"
-
-        />
-
-
-
-    <Button
-        android:id="@+id/btn_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
 
         />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:hint="Downloading content"
+        android:hint="@string/EditText"
         android:textSize="30dp"
 
         />
 
-</android.support.v7.widget.LinearLayoutCompat>
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_submit"
+
+        />
+
+    <EditText
+        android:id="@+id/editContent"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/EditContent"
+        android:textSize="30dp"
+
+        />
+</LinearLayout>
