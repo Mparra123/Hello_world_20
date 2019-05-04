@@ -20,7 +20,7 @@
         android:id="@+id/editText"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:hint="@string/EditText"
+        android:text="@string/editURL"
         android:textSize="30dp"
 
         />
@@ -29,15 +29,22 @@
         android:id="@+id/btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/btn_submit"
 
         />
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+
+        ></View>
+
+
     <EditText
         android:id="@+id/editContent"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/EditContent"
+        android:layout_width="match_parent"
+        android:layout_height="457dp"
         android:textSize="30dp"
 
         />

@@ -12,10 +12,12 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        /*
         Bundle i = getIntent().getExtras();
         String message = i.getString("message");
 
         final TextView mTextView = (TextView)findViewById(R.id.textView2);
         mTextView.setText(message);
+        */
     }
 }

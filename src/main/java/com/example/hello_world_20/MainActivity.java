@@ -1,6 +1,9 @@
 package com.example.hello_world_20;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Log.i(TAG,"I'm onCreate");
+
+
+        //Hot fix in order to run network operations on thread or as an asynchronous task.
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         setupUI();
     }
 
@@ -61,24 +79,41 @@ public class MainActivity extends AppCompatActivity {
 
         final Button mButton =(Button)findViewById(R.id.btn_submit);
 
+       final EditText mEdit_Text = (EditText)findViewById(R.id.editText);
+
         //final Button mNewButton = (Button)findViewById(R.id.btn_new); new activity constant
 
-        final Intent intent2= new Intent(this,Main2Activity.class);
+        //final Intent intent2= new Intent(this,Main2Activity.class); // instance of the new activity.
 
-        final String[] message = {""};//= String.format("Holi"); //test send message
+        //final String[] message = {""};//= String.format("Holi"); //test send message to the other activity
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //button do something
 
-                EditText mEdit_Text = (EditText)findViewById(R.id.editText);
 
-                mTextView.setText(mEdit_Text.getText()); // we set the value that will get the text
+                if(hasInternetAccess()==false){ // validating internet connection permissions.
 
-                Toast.makeText(getApplicationContext(),"Changed",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Not internet connection sorry :(",Toast.LENGTH_SHORT).show();
 
-                message[0] = String.format(mTextView.getText().toString());
+                }else{
+
+                    Toast.makeText(getApplicationContext(),"Internet connection successfully accomplish",Toast.LENGTH_SHORT).show();
+
+                    try {
+
+
+                        //mEditContent.setText(downloadContent(mEdit_Text.toString())); // we set the value that will get the text
+                        downloadContent(mEdit_Text.getText().toString());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(),"Error downloading",Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                //message[0] = String.format(mTextView.getText().toString()); // message with the value of the textView
             }
         });
 
@@ -94,6 +129,52 @@ public class MainActivity extends AppCompatActivity {
 */
     }
 
+    public boolean hasInternetAccess(){ //method to validate the connectivity.
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+        return netInfo != null &&  netInfo.isConnectedOrConnecting();
+
+    }
+
+    //method to download the content of the URL provided on the app
+    private void downloadContent (String url) throws IOException {
+        String response="";
+        URL urlToFetch = new URL(url);
+        HttpURLConnection urlConnection = (HttpURLConnection)urlToFetch.openConnection(); //opening the connection
+
+        InputStream stream =urlConnection.getInputStream(); // will save the data
+        response = readStrem(stream); //method that will read the data with a buffer
+        urlConnection.disconnect(); //closing the connection
+
+        EditText mEditContent = (EditText)findViewById(R.id.editContent);
+        mEditContent.setText(response);
+        // set the response and put to the edit tex content
+    }
+
+    //method that will buffer the data and response the string chain. "Convert the InputStrem to String"
+    private String readStrem(InputStream stream) {
+
+        Reader reader = new InputStreamReader(stream);
+        BufferedReader buffer = new BufferedReader(reader);
+        String response=""; // the response to show
+        String chunkJustRead=""; // the data collected
+
+        try{
+            while((chunkJustRead = buffer.readLine()) != null){
+                response += chunkJustRead;
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+        return response;
+    }
+
+
+    //method to go to other activity
     private void goSecondActivity() {
 
         Intent intent = new Intent(this,Main2Activity.class);

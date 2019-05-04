@@ -4,7 +4,7 @@
     <!-- this is a comment <string name="btn_new">new activity</string>-->
     <string name="btn_submit">Download</string>
     <string name="text_activ2">value</string>
-    <string name ="EditText">Type your URL</string>
-    <string name ="EditContent"></string>
+    <string name ="editText">Type your URL</string>
+    <string name ="editURL">https://www.google.com</string>
 
 </resources>
